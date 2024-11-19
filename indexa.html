@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perguntas Interativas</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Decisão do Dia</h1>
+        <div class="card p-4 shadow">
+            <div id="question1">
+                <p>Você vai na casa do biscoito?</p>
+                <button id="biscoitoSim" class="btn btn-success">Sim</button>
+                <button id="biscoitoNao" class="btn btn-danger">Não</button>
+            </div>
+
+            <div id="question2" class="question" style="display: none;">
+                <p>Você vai em algum lugar com a Thamyres?</p>
+                <button id="thamyresSim" class="btn btn-success">Sim</button>
+                <button id="thamyresNao" class="btn btn-danger">Não</button>
+            </div>
+
+            <div id="question3" class="question" style="display: none;">
+                <p>Você vai comer pastel com a Thamyres?</p>
+                <button id="pastelSim" class="btn btn-success">Sim</button>
+                <button id="pastelNao" class="btn btn-danger">Não</button>
+            </div>
+
+            <div id="question4" class="question" style="display: none;">
+                <p>Você não vai fazer nada?</p>
+                <button id="nadaSim" class="btn btn-success">Sim</button>
+                <button id="nadaNao" class="btn btn-danger">Não</button>
+            </div>
+
+            <div id="output" class="mt-4 text-center"></div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        let result = "";
+
+        document.getElementById('biscoitoSim').addEventListener('click', function() {
+            result = "Você vai na casa do biscoito.";
+            showNextQuestion('question2');
+        });
+
+        document.getElementById('biscoitoNao').addEventListener('click', function() {
+            showNextQuestion('question2');
+        });
+
+        document.getElementById('thamyresSim').addEventListener('click', function() {
+            result = "Você vai em algum lugar com a Thamyres.";
+            showNextQuestion('question3');
+        });
+
+        document.getElementById('thamyresNao').addEventListener('click', function() {
+            showNextQuestion('question3');
+        });
+
+        document.getElementById('pastelSim').addEventListener('click', function() {
+            result = "Você vai comer pastel com a Thamyres.";
+            showNextQuestion('question4');
+        });
+
+        document.getElementById('pastelNao').addEventListener('click', function() {
+            showNextQuestion('question4');
+        });
+
+        document.getElementById('nadaSim').addEventListener('click', function() {
+            result = "Você vai chamar o Cauê.";
+            showResult();
+        });
+
+        document.getElementById('nadaNao').addEventListener('click', function() {
+            showResult();
+        });
+
+        function showNextQuestion(nextQuestionId) {
+            // Esconde todas as perguntas
+            document.querySelectorAll('.question').forEach(question => {
+                question.style.display = 'none';
+            });
+            // Exibe a próxima pergunta
+            document.getElementById(nextQuestionId).style.display = 'block';
+        }
+
+        function showResult() {
+            // Exibe o resultado final
+            document.getElementById('output').innerHTML = `<h5>${result}</h5>`;
+            // Esconde todas as perguntas após a última
+            document.querySelectorAll('.question').forEach(question => {
+                question.style.display = 'none';
+            });
+        }
+    </script>
+</body>
+</html>
